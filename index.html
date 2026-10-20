@@ -125,12 +125,15 @@ footer { margin-top:28px; color:var(--muted); font-size:.8rem; border-top:1px so
   </div>
 </header>
 
-<div class="note">A/B 实测（REPORT.md）对比的是 Control #2839 vs Prompt <b>v2</b>（commit <code>8feda4499cc0</code>）。本页 Treatment 列取自 <code>/workspace/vc-prompt-opt-v2</code> 最新工作树，在 v2 之上又加了 <b>v3 intent gate + paraphrase/ASR 例句</b>（未提交；相对 <code>8feda4499cc0</code> 仅改 <code>meetingInstructions</code> 3 行）。 Backend / tools 与 Control、v2 完全一致。<br/>
-生成时间：2026-10-20 22:40 Asia/Shanghai · 示例身份渲染：assistant=<code>小G</code> owner=<code>张三</code> ·
+<div class="note"><b>表内数字仍为 v2 跑分，v3 A/B 进行中。</b>
+A/B 实测（REPORT.md）对比的是 Control #2839 vs Prompt <b>v2</b>（commit <code>8feda4499cc0</code>），Decision: <b>NO_MERGE</b>。
+本页 Treatment 列取自已推送的 <b>Prompt v3</b> @ <code>fad0ccee80329773fa504ec8f4b2ead0711c01b0</code>（PR #2840 head · 分支 <code>fix/meeting-voice-delegate-prompt-v2</code>）：在 v2 之上加了 <b>intent gate + paraphrase/ASR 例句 + 扩 claim ban</b>（仅改 Voice <code>meetingInstructions</code>）。
+Backend / tools 与 Control、v2 完全一致。<br/>
+生成时间：2026-10-20 22:45 Asia/Shanghai · 示例身份渲染：assistant=<code>小G</code> owner=<code>张三</code> ·
 源文件 <code>services/gru-app/src/lib/meeting-gptlive.ts</code> + <code>meeting-identity.ts</code>
 </div>
 
-<nav class="toc">
+<nav class="toc"><nav class="toc">
   <a href="#meta">元信息</a>
   <a href="#ab">A/B 结果</a>
   <a href="#scenarios">场景 / utterance</a>
@@ -157,11 +160,12 @@ footer { margin-top:28px; color:var(--muted); font-size:.8rem; border-top:1px so
     </dl>
   </div>
   <div class="card t-border">
-    <h2><span class="pill pill-t">Treatment</span> Treatment Prompt v3（工作树 = v2 + intent gate）</h2>
+    <h2><span class="pill pill-t">Treatment</span> Treatment Prompt v3 @ fad0ccee8（已推送）</h2>
     <dl class="kv">
       <dt>标签</dt><dd>Prompt v3（purpose-first + intent gate）</dd>
-      <dt>基线 commit</dt><dd><code>8feda4499cc0a24610fc966ff9839f2379a52643</code>（v2）</dd>
-      <dt>工作树</dt><dd>相对 v2 未提交改动：+上屏意图闸门 / ASR 例句 / 扩 claim ban</dd>
+      <dt>git SHA</dt><dd><code>fad0ccee80329773fa504ec8f4b2ead0711c01b0</code></dd>
+      <dt>PR / 分支</dt><dd>#2840 · <code>fix/meeting-voice-delegate-prompt-v2</code></dd>
+      <dt>相对 v2</dt><dd>v2 <code>8feda4499cc0</code> + 上屏意图闸门 / ASR 例句 / 扩 claim ban（已提交）</dd>
       <dt>Voice 模型</dt><dd><code>gpt-live-1</code>（同 Control）</dd>
       <dt>Backend 模型</dt><dd>同 Control · Backend instructions <b>unchanged</b></dd>
       <dt>observation_ms</dt><dd>40000</dd>
@@ -172,8 +176,8 @@ footer { margin-top:28px; color:var(--muted); font-size:.8rem; border-top:1px so
 </section>
 
 <section id="ab" class="card" style="margin-bottom:18px">
-  <h2>A/B 结果摘要（实测 = Control vs Prompt v2，非 v3）</h2>
-  <p style="color:var(--muted);font-size:.88rem;margin:0 0 10px">来源 <code>/workspace/live-drop-demo-v2/REPORT.md</code> · Decision: <b style="color:var(--del)">NO_MERGE</b>（update_screen_paraphrase 变差）。v3 尚未跑 A/B。</p>
+  <h2>A/B 结果摘要（表内数字仍为 v2 跑分，v3 A/B 进行中）</h2>
+  <p style="color:var(--muted);font-size:.88rem;margin:0 0 10px">来源 <code>/workspace/live-drop-demo-v2/REPORT.md</code> · Decision: <b style="color:var(--del)">NO_MERGE</b>（update_screen_paraphrase 变差）。下列数字为 Control vs Prompt <b>v2</b>（<code>8feda4499cc0</code>）；本页 Treatment Prompt 已是 <b>v3</b> @ <code>fad0ccee8</code>，v3 A/B 尚无新结果。</p>
   <div style="overflow:auto">
   <table>
     <thead><tr>
@@ -874,7 +878,7 @@ After delegate or cancel tools return, answer in one short first-person sentence
 
 <footer>
   本地路径：<code>/workspace/live-drop-demo-v2/prompt-compare.html</code><br/>
-  Control SHA <code>39c8692a27b1</code> · Treatment 基线 <code>8feda4499cc0</code> + 工作树 v3 ·
+  Control SHA <code>39c8692a27b1</code> · Treatment Prompt v3 <code>fad0ccee8</code> ·
   页面自包含，无外网依赖。
 </footer>
 </div>
